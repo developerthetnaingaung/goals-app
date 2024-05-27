@@ -8,6 +8,7 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
+import { StatusBar } from "expo-status-bar";
 
 import GoalsItem from "./components/GoalsItem";
 import GoalsInput from "./components/GoalsInput";
@@ -40,33 +41,36 @@ export default function App() {
   }
 
   return (
-    <View style={styles.appContainer}>
-      <Button
-        title="Add To Goals"
-        color="purple"
-        onPress={startAddGoalHandler}
-      />
-      <GoalsInput
-        visible={modalVisible}
-        onAddGoals={addGoalHandler}
-        onCancel={cancelAddGoalHandler}
-      />
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={enterGoals}
-          renderItem={(itemData) => {
-            return (
-              <GoalsItem
-                text={itemData.item.text}
-                id={itemData.item.id}
-                deleteItem={deleteGoalHandler}
-              />
-            );
-          }}
-          keyExtractor={(item) => item.id}
+    <>
+      <StatusBar style="auto" />
+      <View style={styles.appContainer}>
+        <Button
+          title="Add To Goals"
+          color="#A90BE8"
+          onPress={startAddGoalHandler}
         />
+        <GoalsInput
+          visible={modalVisible}
+          onAddGoals={addGoalHandler}
+          onCancel={cancelAddGoalHandler}
+        />
+        <View style={styles.goalsContainer}>
+          <FlatList
+            data={enterGoals}
+            renderItem={(itemData) => {
+              return (
+                <GoalsItem
+                  text={itemData.item.text}
+                  id={itemData.item.id}
+                  deleteItem={deleteGoalHandler}
+                />
+              );
+            }}
+            keyExtractor={(item) => item.id}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
@@ -75,6 +79,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 50,
     paddingHorizontal: 19,
+    borderRadius: 10,
+    backgroundColor: "#E2CAEB",
   },
   goalsContainer: {
     flex: 5,
